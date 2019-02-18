@@ -1,0 +1,1886 @@
+@CHARSET "UTF-8";
+
+/* ------ Classes referente ao Template da aplicação ------ */
+html, body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	font-size: 13px !important;
+}
+
+b, strong, th {
+	font-weight: 900;
+}
+
+label {
+	font-weight: 500;
+}
+
+legend {
+	width: inherit;
+	padding: 0 5px;
+	margin: 0 0 0 20px;
+	border: 0;
+	color: #00594b;
+	font-size: 13px;
+	font-weight: 700;
+	font-family: "Arial Negrito", "Arial";
+}
+
+fieldset {
+	clear: both;
+	margin: 0 0 20px 0;
+	padding: 0 15px;
+	border-radius: 3px;
+	border: 1px solid #ccc;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+}
+
+img {
+	display: inline-block;
+	height: auto;
+	max-width: 100%;
+}
+
+input[type=checkbox], input[type=radio] {
+    margin: 2px 0 0;
+}
+
+#fullContent {
+	position: relative;
+	min-height: 100%;
+}
+
+/* Content Principal */
+#content {
+	padding-bottom: 110px;
+	clear: both;
+}
+
+.content {
+	padding-top: 1%;
+	background: #F5F7FA;
+}
+
+.table-radio {
+	border-collapse: separate;
+   	/*border-spacing: 2px 2px;*/
+   	padding-right: 10px;
+}
+
+/* Header */
+#header {
+	height: 139px;
+	color: #ffffff;
+	background-color: #1659BF;
+}
+
+#header .acessibilidade-header {
+    padding-top: 5px;
+}
+
+#header a, #header a:link, #header a:visited, 
+#header a:hover, #header a:active {
+	color: #ffffff;
+	text-decoration: none;
+}
+
+#header h1, .h1, h2, .h2, h3, .h3 {
+	margin-top: 3px;
+	margin-bottom: 3px;
+}
+
+#header h1, .h1, h2, .h2  {
+	font-weight: 700;
+}
+
+/* Footer */
+#footer {
+	bottom: 0;
+	width: 100%;
+	height: 100px;
+	position: absolute;
+	background-color: #0F4098;
+}
+
+#footer * {
+	color: #ffffff;
+}
+
+#footer .footer-menu {
+	background-color: #1659BF;
+}
+
+#footer .footer-menu ul {
+	padding-left: 0;
+}
+
+#footer .footer-menu ul li {
+    list-style-type: none;
+}
+	
+#footer .footer-menu ul li a {
+	cursor: pointer;
+}
+
+#footer .footer-menu ul li:first-child {
+    padding-bottom: 2%;
+    font-weight: bold;
+}
+
+#footer .footer-menu ul li:not(:first-child) {
+	border-left: 1px solid #5B8AD2;
+	padding-left: 2%;
+}
+
+
+#footer .footer-menu, #footer .footer-container {
+	padding-top: 1%;
+	padding-bottom: 1%;
+}
+
+#footer .version-system {
+	background: #F1F1F1;
+	position: absolute;
+	min-height: 30px;
+	width: 100%;
+	margin: 0;
+	bottom: 0;
+}
+
+#footer h6, .h6 {
+	font-size: 11px;
+	line-height: 0.8;
+}
+
+#footer .logo-acesso-footer {
+	width: 170px;
+    background: url('../img/logo-acesso_25.png') left no-repeat;
+	height: 48px;
+	display: block;
+}
+
+#footer .cvm-description-footer {
+	height: 55px;
+    vertical-align: 10px;
+	padding-left: 10px;
+    padding-right: 10px;
+    display:  inline-block;
+}
+
+#footer .logo-brasil-footer {
+	width: 153px;
+	background: url('../img/brasil-gov.png') right no-repeat;
+	height: 48px;
+	  display: inline-block;
+}
+
+@media (max-width: 480px) {
+	
+	#header {
+		height: 155px;
+	}
+	
+	#header .cvm-description-header {
+		display:  none;
+	}
+	
+	#header .acessibilidade-header {
+		padding-bottom: 5px;
+		padding-top: 5px;
+	}
+	
+	#footer {
+	    height: 580px;
+	}
+	
+	#footer .footer-menu ul {
+		padding-left: 15px;
+	}
+	
+	#content {
+		padding-bottom: 600px;
+	}
+	
+	#footer .acesso-footer-container {
+		display: none;
+	}
+	
+	#footer .footer-container {
+  		padding-top: 4%;
+	}
+	
+}
+
+@media only screen and (min-width:480px) and (max-width: 1199px)  {
+	
+	#header .cvm-description-header {
+		float: left;
+	}
+	
+	#footer .acesso-footer-container {
+		float: left;
+	}
+	
+	#footer .footer-menu .col-lg-3 {
+		float: left;
+		width: 33%;
+	}
+	
+}
+
+/* Menus - Brasil */
+.nav-brasil {
+	background: #7F7F7F;
+}
+
+.nav-brasil #wrapper-barra-brasil {
+	 max-width: 1143px;
+}
+
+.nav-brasil #menu-barra-temp a {
+	font-family: sans, sans-serif;
+	text-decoration: none;
+	color: white;
+}
+
+.nav-brasil #menu-barra-temp li {
+	float: left;
+	display: inline;
+	margin-right: 10px;
+	padding-right: 10px;
+	border-right: 1px solid #EDEDED
+}
+
+.nav-brasil #menu-barra-temp ul {
+	list-style: none; 
+	padding: 0;
+}
+
+/* ----------- Menus - Principal ------------- */
+.nav-principal .navbar {
+	min-height: 30px;
+	margin: 0;
+	border: none;
+	border-radius: 0;
+}
+
+.nav-principal .navbar-default, 
+.nav-principal .navbar-default .navbar-toggle {
+	background: #0042B1;
+}
+
+.nav-principal .navbar-default .navbar-toggle .icon-bar {
+	background-color: #ffffff;
+}
+
+.nav-principal .navbar-nav>li>a, .nav-principal .navbar-nav>li>a:link, .nav-principal .navbar-nav>li>a:visited, 
+.nav-principal .navbar-nav>li>a:hover, .nav-principal .navbar-nav>li>a:active {
+	color: #ffffff;
+}
+
+.nav-principal .navbar-default .navbar-nav>.open>a, .nav-principal .navbar-default .navbar-nav>.open>a:hover,
+.nav-principal .navbar-default .navbar-nav>.open>a:focus {
+	color: #606060;
+	background: #F1F1F1;
+}
+
+@media (min-width: 768px) {
+	.nav-principal .navbar-nav>li>a {
+		padding-top: 0;
+		padding-bottom: 2px;
+		line-height: 28px;
+	}
+	
+	.nav-principal .nav li:hover > ul.dropdown-menu {
+    	display: block;    
+	}
+}
+
+.nav-principal .dropdown-menu {
+	border-radius: 0;
+}
+
+.nav-principal .navbar-collapse {
+	padding: 0;
+}
+
+@media (max-width: 768px) {
+	.nav-principal .navbar-nav>li>a {
+		border-bottom: 1px solid #dfdfdf;
+	}
+		
+	.nav-principal .navbar-default .navbar-nav .open .dropdown-menu>li>a {
+ 		color: #ffffff; 
+	}
+	
+	.nav-principal .nav .open>a, .nav .open>a:hover, .nav .open>a:focus {
+		background-color: #1659BF;
+		border: none;
+	}
+	
+	.nav-principal .navbar-nav .open .dropdown-menu {
+		background-color: #4182E5;
+		border-bottom: solid 1px #ffffff;
+	}
+}
+
+.nav-principal .separador {
+	background: #F1F1F1;
+	min-height: 30px;
+	margin: 0;
+	padding: 0;
+}
+
+/* Adiciona o efeito HOVER ao MENU */
+.nav-principal .nav > li:hover  {
+	background: #F1F1F1;
+} 
+
+.nav-principal .nav li:hover>a  {
+	color: #606060;
+} 
+
+/* Menu - Botões */
+.nav-button {
+	display: block;	
+	width: 100%;
+}
+
+.nav-button li {
+	padding: 10px;
+}
+
+.nav-button li>a {	
+	text-shadow: 0 1px 0 #fff;
+	text-align: center;
+	
+	background-image: -webkit-linear-gradient(top,#fff 0,#e0e0e0 100%);
+	background-image: -o-linear-gradient(top,#fff 0,#e0e0e0 100%);
+	background-image: -webkit-gradient(linear,left top,left bottom,from(#fff),to(#e0e0e0));
+	background-image: linear-gradient(to bottom,#fff 0,#e0e0e0 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe0e0e0', GradientType=0);
+	filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+	background-repeat: repeat-x;
+	border: 1px solid #ccc;
+	width: 100%;
+	height: 120px;
+}
+
+.nav-button li>a>span {
+	display: block;
+	margin-top: 10px;
+}
+
+.nav-button li>a.only-text>span {
+	margin-top: 25px;
+}
+
+.nav-button li>a, .nav-button li>a:hover, .nav-button li>a:focus {
+	color: #606060;
+}
+
+.nav-button li>a:hover {
+	background: #e0e0e0;
+}
+
+@media (max-width: 768px) {
+	.navbar-nav {
+		margin: 0;
+	}
+}
+
+/* Configuração de apresentação dos sub-menus */
+.nav-principal .dropdown-submenu {
+    position: relative;
+}
+
+.nav-principal .dropdown-submenu .dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -1px;
+}
+
+/* ----------- Menus - Side Bar ------------- */
+.sidebar, .content {
+	margin-top: 1%;
+}
+
+	.sidebar ul {
+		padding: 0;
+		margin: 0 0 20px 0;
+	}
+		.sidebar li {
+		    list-style-type: none;
+		    font-weight: 400;
+			font-size: 13px;
+		}
+	
+		.sidebar .sidebar-header {
+			padding: 25px 10px;
+			border-top: 5px solid #1659BF;
+		  	background-color: #EDEFF1;
+		  	text-transform: uppercase;
+		}
+			.sidebar .sidebar-header, .sidebar-header a {
+				color: #1659BF;
+			}
+		
+		.sidebar .sidebar-item {
+			padding: 5px 10px;
+		}
+			.sidebar .sidebar-item:not(:last-child) {
+				border-bottom: 1px solid #CCC;
+			}
+			.sidebar .sidebar-item, .sidebar .sidebar-item a {
+				color: #333;
+			}
+
+/*=================================================================================
+									Componentes
+================================================================================ */
+
+/* ------------- Botões ------------- */
+.btn {
+	padding: 4px 12px;
+	font-size: 13px;
+}
+
+.table .btn, .table a {
+	padding: 0px;
+	cursor: pointer;
+}
+	.table .btn img {
+		max-width: none;
+	}
+
+.border-link {
+	border-left: 1px solid #ccc;
+	margin : 0 10px 0 10px;
+}
+
+/* ------------- Modal ------------- */
+.modal-header {
+	padding: 10px;
+}
+
+@media (min-width: 768px) {
+	.modal-dialog {
+		margin: 6% auto;
+	}
+	  
+	.popup-calendar .scroll-popup {
+	    overflow-x: visible;
+	    overflow-y: visible;
+	}
+	
+	.popup-calendar .modal-body {
+		padding: 15px 15px 50px 15px;
+	}
+	
+	.popup-calendar .modal-dialog {
+	    margin: 12% auto;
+	}
+}
+
+/* ------------- Confirm ------------- */
+@media (min-width: 768px) {
+  .confirm-dialog {
+    margin: 15% auto;
+  }
+}
+
+/* ------------- Modal Loader ------------- */
+.loader {
+	display: none;
+}
+
+.loader .modal-backdrop.in {
+	opacity: 0.1;
+}
+
+.loader .modal-dialog {
+  margin: 18% auto;
+}
+
+/* ------------- Message ------------- */
+.message {
+	top: 35px;
+	left: 7.7%;
+	right: 10%;
+	width: 85.7%;
+	z-index: 1050;
+	position: fixed;
+}
+
+.message-content {
+	width: 100%;
+	padding: 10px;
+	display: none;
+	margin-bottom: 15px;
+}
+
+/* ------------- ngTable ------------- */
+.table, .simple-table {
+	width: 100%;
+	font-size: 12px;
+	margin-bottom: 0;
+	border-spacing: 0;
+	border-collapse: separate;
+}
+
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th {
+	padding: 4px 5px;
+	line-height: 15px;
+	text-align: center;
+	vertical-align: middle;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	border-top: solid 1px #ccc !important;
+	font-weight: 700;
+	font-family: "Arial Negrito", "Arial";
+}
+
+.table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
+	padding: 0 5px;
+	vertical-align: middle;
+	border-top-width: 0;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+}
+
+.table tr th:first-child, .table tr td:first-child, .table .foot-calc td div:last-child {
+ 	border-left: 1px solid #ccc;
+}
+
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>tfoot>tr>td {
+	text-shadow: 0;
+	background-image: -webkit-linear-gradient(top,#fff 0,#e0e0e0 100%);
+	background-image: -o-linear-gradient(top,#fff 0,#e0e0e0 100%);
+	background-image: -webkit-gradient(linear,left top,left bottom,from(#fff),to(#e0e0e0));
+	background-image: linear-gradient(to bottom,#fff 0,#e0e0e0 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe0e0e0', GradientType=0);
+	filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+	background-repeat: repeat-x;
+	border-color: #ccc; 
+}
+
+.table .foot-calc td {
+	background: none;
+	font-size: 11px;
+	font-weight: 600;
+}
+
+.table .row-desc div:not(:last-child) {
+    border-bottom: 1px solid #CCC;
+}
+
+/* ------------- Selection Table - TODO criar versão responsiva -------------  */
+.selection-table .selection-table-control {
+	width: 3%;
+	z-index: 960;
+	position: fixed;
+}
+
+.selection-table .selection-table-control .btn-group {
+	display: block;
+}
+
+.selection-table .table {
+	margin-left: 4%;
+    width: 96%;
+}
+
+.table .select-row:hover{
+	background: rgb(239, 239, 239);
+	cursor: pointer;
+}
+
+.selection-table .table .selected-row{
+	background: #D6EBFF !important;
+}
+
+/* ------------- ngTableCheckbox ------------- */
+
+td.ng-table-checkbox {
+	width: 30px;
+	text-align: center;
+}
+
+/* ------------- Pagination ------------- */
+.pagination-control {
+	font-size: 12px;
+	padding-top: 4px;
+	text-align: center;
+}
+
+.pagination-control ul.pagination {
+	margin:  0;
+	padding: 0;
+}
+
+.pagination-control ul.pagination>.active a {
+	color: #337ab7;
+	background : #F8F8F8;
+	border: 1px solid #ccc;
+}
+
+.pagination-control>.pagination>.disabled a, .pagination-control>.pagination>.disabled a:hover, .pagination-control>.pagination>.disabled a:focus {
+	color: #6F6060;
+	background: #D8D8D8;
+	border: 1px solid #ccc;
+}
+
+.pagination-control ul.pagination>li>a {
+	padding: 0;
+	width: 30px;
+	margin: 0 1px;
+	text-decoration: none;
+	border: 1px solid #ccc;
+	
+	background-image: -webkit-linear-gradient(top,#fff 0,#D6D6D6  100%);
+	background-image: -o-linear-gradient(top,#fff 0,#D6D6D6  100%);
+	background-image: -webkit-gradient(linear,left top,left bottom,from(#fff),to(#D6D6D6 ));
+	background-image: linear-gradient(to bottom,#fff 0,#D6D6D6  100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe0e0e0', GradientType=0);
+	filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+}
+
+.pagination-control .total-register {
+	float: right;
+	font-size: 12px;
+	padding-right: 5px;
+	position: relative;
+	
+	font-weight: 700;
+	font-family: "Arial Negrito", "Arial";
+}
+
+/* ------------- ngTable Filter ------------- */
+
+.input-filter {
+	font-weight: 500;
+	border-radius: 0px;
+}
+
+/* ------------- Simple Table ------------- */
+.simple-table {
+	border: 1px solid #E4E4E4;
+}
+	.simple-table tbody tr th {
+		background-color: #165ABF;
+		color: #FFF;
+		font-weight: 700 !important;
+	}
+		.simple-table th, .simple-table td {
+			padding: 5px;
+		}
+
+/* ------------- projection table ------------- */
+.projection-table>tfoot>tr>th {
+	text-align: right;
+	border-top: none !important;
+}
+ 
+.projection-table>tfoot>tr>th.text-left {
+	text-align: left !important;
+}
+ 
+ .projection-table>tfoot>tr>th.text-center {
+	text-align: center !important;
+}
+ 
+.projection-table>thead>tr>th {
+	border-bottom: none !important;
+}
+ 
+.projection-table .titulo{
+  font-family: 'Arial Negrito', 'Arial';
+  font-weight: 700;
+  font-style: normal;
+  color: #00594B;
+}
+
+.hover-table tr:not(.not-hover):hover {
+	background-color: #F0F0F0;
+	cursor: pointer;
+}
+
+/* ------------- input Table ------------- */
+
+.input-table {
+	padding-top: 5px;
+	padding-bottom: 5px; 
+}
+
+.input-table>tbody>tr>td {
+   padding: 5px !important; 
+}
+
+.input-table>tbody>tr.last-tr td {
+    border-bottom-width: 0;
+}
+
+.input-table>tbody>tr.last-tr td label.label-outros {
+   padding-top: 8px;
+}
+
+/* ------------- ngPickList ------------- */
+.pickList {
+	min-height: 150px;
+}
+
+.pickList .row {
+	margin-right: -42px;
+}
+
+@media (max-width: 768px) {
+	.pickList .row {
+		margin-right: -15px;
+	}
+}
+
+.pickList .col-lg-5 {
+	float: left;
+	width: 46%;
+}
+
+.pickList ul {
+	margin: 0;
+	padding: 0;
+	float: left;
+	list-style: none;
+	min-height: 200px;
+	padding-top: 55px;
+}
+
+.pickList div > select {
+	margin: 0;
+	padding: 0;
+	min-height: 200px;
+	overflow: auto;
+}
+
+.pickList div > select > option {
+	padding: 5px !important;
+}
+
+.pickList ul > li > button.btn {
+	border: 0;
+	height: 30px;
+	color: #337ab7;
+	background: none;
+}
+
+/* ------------- ngCollapseToggle ------------- */
+ .ng-collapse-toggle-line {
+	border-bottom: 1px solid #E4E4E4 !important;
+ }
+
+/* ------------- ngCollapseRow ------------- */ 
+
+.ng-collapse-row td.ng-collapse-hide {
+	border-bottom: 0;
+}
+
+.ng-collapse-row div.ng-collapse-content {
+	display: none;
+	padding: 10px 0;
+}
+
+.ng-collapse-row div.ng-collapse-content table {
+	margin: 10px 0;
+	table-layout: fixed;
+}
+
+.icon-double-down, .icon-double-up {
+	width: 30px;
+	text-align: center;
+}
+
+/* ------------- ngPopover ------------- */
+.popover {
+	width: 100%;
+	max-width: 100%;
+	font-size: 12px;
+}
+
+/* ------------- Popover Inline ------------- */
+.popover-inline {
+	z-index: 0;
+}
+	.popover-inline .popover {
+		position: relative;
+		float: left;
+		text-align: center;
+		border-color: #E4E4E4;
+		box-shadow: none;
+		background: #F5F7FA;
+	}
+		.popover-inline .popover.bottom>.arrow {
+			border-bottom-color: #E4E4E4;
+		}
+	
+		.popover-inline .popover.bottom>.arrow:after {
+			border-bottom-color: #F5F7FA;
+		}
+		
+		.popover-inline .popover, .popover-inline .popover span {
+			display: block;
+		}
+		
+		.popover-inline .popover .dots {
+			color: #1149AD;
+			font-size: 26px;
+		}
+
+/* ------------- Panel Subtitle ------------- */
+.panel-subtitle {
+	color: #666;
+	font-size: 11px;
+	text-transform: uppercase;
+}
+
+.ng-collapse-content .panel-subtitle {
+	color: #00594B;
+	font-weight: 600;
+	font-size: 12px;
+	text-transform: none;
+}
+
+/* ------------- Panel ------------- */
+.panel {
+	border-radius: 10px;
+	box-shadow: none;
+	-webkit-box-shadow: none;
+}
+
+.panel .panel-heading {
+	border-top-left-radius: 10px;
+ 	border-top-right-radius: 10px;
+}
+
+.panel-default>.panel-heading {
+	font-size: 13px;
+	color: #00500F;
+	border: none;
+}
+
+.panel-default>.panel-heading [class*="icon-"] {
+	color: #CCC;
+ 	font-size: 18px;
+ 	cursor: pointer;
+}
+
+.panel-default>.panel-heading .icons-action [class*="icon-"] {
+ 	font-size: 15px;
+}
+
+/* ------------- ngPanelCollapse ------------- */
+.panel-collapse .see-more {
+	font-size: 9px;
+	color: #999999;
+	text-transform: capitalize;
+}
+	.panel-collapse .panel-body {
+		padding: 0 15px 15px 15px;
+	}
+		.panel-collapse .panel-body .panel-title, .icon-content .panel-title {
+			padding: 5px 0;
+		  	display: block;
+	 		font-size: 13px;
+			font-weight: 700;
+		}
+		
+		.panel-collapse .panel-body p {
+			margin: 0;
+		}
+
+
+.panel-collapse.panel-wrapper .panel-default {
+	border: 0;
+}
+	.panel-collapse.panel-wrapper .panel-heading, .panel-collapse.subpanel-wrapper .panel-heading {
+		padding: 0 2px;
+	}
+	
+	.panel-collapse.panel-wrapper .panel-body {
+		padding: 15px;
+		border-radius: 10px;
+		border: 1px solid transparent;
+	}
+
+	.panel-default, .panel-collapse.panel-wrapper .panel-body  {
+	  	border-color: #E4E4E4;
+	}
+	
+.panel-collapse.subpanel-wrapper .panel-default .panel-subtitle {
+	color: #00500F;
+	text-transform: none;
+	font-weight: 600;
+}
+
+/* ------------- Panel Icone ------------- */
+.panel-icon-footer:hover {
+	cursor: pointer;
+}
+
+.panel-icon .icon-graduation {
+	font-size: 70px !important;
+}
+
+.panel-icon, .btn-icon {
+    width: 100%;
+}
+	 a.btn-icon {
+	 	text-decoration: none;
+	 }
+	.panel-icon .icon-head, .btn-icon .icon-head {
+		width: 75px;
+		height: 75px;
+		line-height: 75px;
+		top: 2px;
+		margin: auto;
+		z-index: 1;
+		text-align: center;
+	}
+	
+	.panel-icon .icon-head, .panel-icon .icon-content, .btn-icon .icon-head, .btn-icon .icon-content,
+	.panel-icon .icon-content .panel-icon-footer {
+		display: block;
+		position: relative;
+		border: 1px solid transparent;
+	}
+	
+.panel-icon .icon-head, .btn-icon .icon-head, .panel-default>.panel-heading {
+    background: #FFF;
+}
+
+.panel-default>.panel-heading {
+ 	border-radius: 15px;
+}
+
+.panel-icon .icon-head [class*="icon-"], .panel-account [class*="icon-"], .btn-icon .icon-head [class*="icon-"] {
+	font-size: 35px;
+}
+
+.panel-icon .icon-head [class*="icon-"], .btn-icon .icon-head [class*="icon-"], .panel-collapse .panel-body .panel-title {
+	color: #5D9CEC;
+}
+
+.panel-icon .icon-content, .btn-icon .icon-content {
+	top: -30px;
+	width: 100%;
+	padding: 30px 5px 0 5px;
+	font-weight: normal;
+}
+		.panel-icon .icon-content .panel-title, .panel-icon .icon-content .panel-icon-footer span, .panel-icon .icon-content .panel-icon-footer a,
+		.panel-default>.panel-heading, .btn-icon .icon-content, .panel-account {
+			text-transform: uppercase;
+		}
+		
+		.panel-icon .icon-content .panel-title, .panel-icon .icon-content p {
+			color: #8F8F8F;
+		}
+		
+		.panel-icon .icon-content, .panel-icon .icon-head, .btn-icon .icon-head, .btn-icon .icon-content {
+		    border-color: #D8D8D8;
+		}
+		
+		.panel-icon .icon-content p {
+			font-size: 13px;
+		}
+		
+		.panel-icon .icon-content .panel-icon-footer, .btn-icon .icon-content .panel-title {
+			background-color: #003FAD;
+			padding: 10px;
+			margin: 10px 0;
+		}
+			.panel-icon .icon-content .panel-icon-footer span, .panel-icon .icon-content .panel-icon-footer a, .panel-icon .icon-content .panel-icon-footer div,
+			.btn-icon .icon-content .panel-title, .panel-account {
+				color: #FFF;
+			}
+			
+			.panel-icon .icon-content .panel-icon-footer span:not(:first-child), .panel-icon .icon-content .panel-icon-footer a:not(:first-child),
+			.panel-icon .icon-content .panel-icon-footer div:not(:first-child) {
+				border-left: 1px dashed #FFF;
+			}
+			
+			.panel-icon .icon-content .panel-icon-footer a, .panel-icon .icon-content .panel-icon-footer div:not(:last-child) {
+				cursor: pointer;
+			}
+
+
+
+/* ------------- ngTabs ------------- */
+
+.nav-tabs.nav-justified>li {
+	background-image: -webkit-linear-gradient(top, #FFF 0, #D6D6D6  100%);
+	background-image: -o-linear-gradient(top, #FFF 0, #D6D6D6  100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#FFF),to(#D6D6D6 ));
+	background-image: linear-gradient(to bottom, #fff 0, #D6D6D6  100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFF', endColorstr='#FFE0E0E0', GradientType=0);
+	filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+	border-radius: 5px 5px 0 0;
+	cursor: pointer;
+	vertical-align: top;
+}
+
+.nav-tabs.nav-justified>li, .tab-content {
+	border: 1px solid transparent;
+	border-color: #CCC;
+} 
+	.tab-content {
+		border-top: none;
+	} 
+
+	.nav-tabs.nav-justified>li:not(:first-child) {
+		border-left: none;
+	}
+
+	.nav-tabs.nav-justified>li {
+		color: #000;
+		padding: 5px;
+		font-size: 12px;
+	}
+
+	.nav-tabs.nav-justified>li.active {
+		font-weight: bold;
+		border-bottom-color: #FFF;
+		background: #FFF;
+	}
+
+.tab-content {
+	padding: 20px;
+}
+
+.tab-icon {
+	height: 15px;
+}
+
+/*=================================================================================
+									Gerais
+================================================================================ */
+
+.break-word {
+	word-break: break-word;
+}
+
+.text-uppercase {
+	text-transform: uppercase;
+}
+  
+
+/* ------------- fonte ------------------ */
+.text-normal {
+	font-weight: normal !important;
+}
+
+.text-bold {
+	font-weight: bolder;
+}
+
+/* ------------- Row ------------------ */
+
+/* Row - col - center */
+.row-center {
+    text-align:center;
+}
+
+.col-center {
+	float:none;
+    text-align:left;
+    margin-right:-4px;
+    display:inline-block;
+}
+
+/* Row - Padding */
+.row-pd-0 {
+	padding-right: 0 !important;
+	padding-left: 0 !important;
+}
+
+.row-pd-1 {
+	padding-right: 1% !important;
+	padding-left: 1% !important;
+}
+
+/* Row - margin */
+.row-mg-0 {
+	margin-right: 0 !important;
+	margin-left: 0 !important;
+}
+
+.row-mg-bottom-0 {
+	margin-bottom: 0 !important;
+}
+
+.row-mg-1 {
+	margin-top: 1%;
+	margin-bottom: 1%;	
+}
+
+.row-mg-2 {
+	margin-top: 2% !important;
+	margin-bottom: 2% !important;
+}
+
+.row-mg-4 {
+	margin-top: 4% !important;
+	margin-bottom: 4% !important;
+}
+
+.row-mg-6 {
+	margin-top: 20% !important;
+	margin-bottom: 20% !important;
+}
+
+.row-mg-0-2 {
+	margin-top: 0.45% !important;
+	margin-bottom: 2% !important;
+}
+
+/* Row - title */
+.row-title {
+	color: #00439E;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: "Open Sans Bold", "Open Sans";
+	margin-left: 1px;
+	margin-right: 1px;
+	border-bottom: 1px solid #ccc;
+}
+
+.row-subtitle {
+    text-transform: uppercase;
+    color: #666;
+    font-size: 11px;
+}
+
+.row-title .col-lg-1, .row-title .col-lg-2, .row-title .col-lg-3, 
+.row-title .col-lg-4, .row-title .col-lg-5, .row-title .col-lg-6, 
+.row-title .col-lg-7, .row-title .col-lg-8, .row-title .col-lg-9, 
+.row-title .col-lg-10, .row-title .col-lg-11, .row-title .col-lg-12 {
+	padding-left: 0;
+}
+
+.row-required {
+	color: red;
+	font-size: 11px;
+	text-align: right;
+	text-transform: capitalize;
+}
+
+.row-warning:before {
+	content: "";
+	width: 16px;
+	height: 15px;
+	margin-right: 5px;
+	display: inline-block;
+	background: url(../img/atencao.png) no-repeat 0 0;
+	background-size: 100%;
+}
+
+.row-warning {
+	color: red;
+}
+
+.row-mg-r-min-30 {
+	margin-right: -30px;
+}
+
+@media (max-width: 768px) {
+	.row-title, .row-required {
+		margin: 0 1px;
+	}
+	
+	.row-mg-r-min-30 {
+		margin-left: -30px;
+	}
+}
+
+.radio-input {
+  min-height: 41px !important;
+}
+
+.label-checkbox {
+	vertical-align: text-bottom;
+}
+
+.line-result{
+	border-bottom: 2px solid #E7E7E7;
+}
+
+/* ------------- Align ------------- */
+.text-center {
+  text-align: center !important;
+}
+
+.text-left {
+  text-align: left !important;
+}
+
+/* ------------- Color ------------- */
+.text-green {    
+	color: #00594B;
+}
+
+.text-grey {    
+	color: #999999;
+}
+
+.text-red {
+	color: red;
+}
+
+.text-pink {
+	color: #800080;
+}
+
+.text-black {
+	color: #333;
+}
+
+.text-negrito {
+ font-weight: bold;
+}
+
+.text-sublinhado {
+   text-decoration: underline;
+}
+
+/* ------------- Campos Obrigatórios ------------- */
+.control-validation {
+  margin-top: -15px;
+  display: block;
+}
+
+
+.required:before {
+	font-size: 12px;
+	content: '* ';
+	color: red;
+}
+
+.validation-invalid {
+	color: red;
+	font-size: 11px;
+ 	font-weight: 700;
+}
+
+/* ------------- Botões ------------- */
+a.btn-link, .btn-link:hover {
+  	cursor: pointer;
+  	color: #2C66CE;
+}
+.btn-link span:not([class*="icon"]) {
+	text-decoration: underline;
+	font-size: 13px;
+}
+
+.btn-link span:hover,  .btn-link:hover {
+	text-decoration: none;
+}
+
+.decoration-none {
+	text-decoration: none !important;
+}
+
+/* ------------- Icones ------------- */
+[class^="icon-"]:before, [class*=" icon-"]:before {
+	margin-left: 0;
+	margin-right: 0;
+}
+
+.icon-setting:before {
+	color: #CCC;
+}
+
+.btn-link .icon-ok:before, .btn .icon-ok:before, 
+.btn-link .icon-left:before, .btn .icon-left:before, 
+.btn-link .icon-right:before, .btn .icon-right:before, 
+.btn-link .icon-plus:before, .btn .icon-plus:before, .icon-ok-circled:before {
+	color: #63AB5A;
+	font-size: 14px;
+}
+
+.icon-icon-cancel-circled:before {
+	color: #EA5858;
+	font-size: 14px;
+}
+
+.btn-link .icon-block:before, .icon-cancel-squared:before, .btn .icon-block:before {
+	color: #FD603F;
+	font-size: 14px;
+}
+
+.icon-cancel-squared:before {
+	font-size: 20px;
+}
+
+img.icon-img {
+	vertical-align: -3px;
+}
+
+/* ------------- Labels ------------- */
+.legend-label {
+	font-size: 10px;
+}
+
+/* ------------- Control Label ------------- */
+.control-label a.btn-label {
+	margin-left: -5px;
+}
+
+.control-label.vertical {
+	margin-bottom: 8.75px !important;
+}
+
+.container-scroll {
+    overflow-x: auto;
+    white-space:nowrap;
+}
+
+.cell-scroll {
+	display: inline-block;
+	vertical-align: top;
+}
+
+.margin-labels {
+    margin-top: 23px;
+}
+
+.margin-top-35 { margin-top: 35px; }
+
+/*=================================================================================
+									Casos de Uso
+================================================================================ */
+
+/* ------ ECS002 Cadastrar Fundo - Outras Informações ------ */
+
+.row-outrar-informacoes {
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+/* ------ ECS007 Cadastrar Fundo Estruturado ------ */
+
+.btn-export-csv img {
+    vertical-align: text-bottom;
+}
+
+/* ------ ECS008 Visualizar Fundo ------ */
+.modified:after, .label-modified:before {
+	color: blue;
+	font-size: 12px;
+	font-weight: bold;
+	content: ' ** ';
+}
+.regulamentosAlterado {
+	color: blue;
+}
+.label-modified {
+	color: blue;
+	font-size: 11px;
+	font-style: italic;
+}
+
+.tabVisualizarRegistroFundo .acoes-visualizar-fundo a {
+	padding: 0px;
+}
+
+/* ------ ECS013 Realizar Atualização Cadastral de Fundo ------ */
+.opcoesAtualizacaoCadastral .panel-icon .icon-content .panel-icon-footer {
+	cursor: pointer;
+}
+
+.opcoesAtualizacaoCadastral .icon-situacao-fundo {
+	margin-left: -4px;
+}
+
+.opcoesAtualizacaoCadastral .icon-website {
+	margin-left: -5px;
+}
+
+.opcoesAtualizacaoCadastral .icon-participantes {
+	margin-left: -13px;
+}
+
+.opcoesAtualizacaoCadastral .icon-regulamento {
+	margin-left: 8px;
+}
+
+.opcoesAtualizacaoCadastral .panel-icon-footer {
+	height: 60px;
+}
+
+.opcoesAtualizacaoCadastral .panel-icon-footer .row div {
+	padding: 3px;
+}
+
+/* ------ ECS024 Realizar Transformação de Fundos ------ */
+.transformacao-fundo .radio {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+/*=================================================================================
+									Auto Contraste
+================================================================================ */
+
+/* ------ Classes referente ao Template da aplicação ------ */
+
+/* Header */
+.alto-contraste #header {
+	color: #ffffff;
+	background-color: #000000;
+}
+
+.alto-contraste #header a, #header a:link, #header a:visited, 
+.alto-contraste #header a:hover, #header a:active {
+	color: #ffffff;
+}
+
+/* Content */
+#fullContent.alto-contraste {
+	background-color: #000;
+	color: #ffffff;
+}
+
+.alto-contraste .content {
+	color: #FFF;
+	background: #333;
+}
+
+/* Footer */
+.alto-contraste #footer , .alto-contraste .footer-menu,
+.alto-contraste #footer .footer-menu, .alto-contraste .sidebar .sidebar-header {
+	color: #ffffff;
+	background-color: #333;
+}
+
+.alto-contraste  #footer .footer-menu ul li:not(:first-child) {
+	border-left: 1px solid #FFF;
+}
+
+.alto-contraste #footer .version-system {
+	background: #000000;
+}
+
+/* ----------- Menus - Principal ------------- */
+.alto-contraste .nav-principal .navbar-default, 
+.alto-contraste .nav-principal .navbar-default .navbar-toggle, .alto-contraste .footer-menu {
+	background: #333;
+}
+
+@media (max-width: 768px) {
+.nav-principal .navbar-nav .open .dropdown-menu {
+		background-color: #737171;
+	}
+}
+
+/* ----------- Menus - Side Bar ------------- */
+.alto-contraste .sidebar .sidebar-item,  .alto-contraste .sidebar .sidebar-item a {
+	color: #FFF;
+}
+
+/* ------------ Campos Obrigatórios ------------- */
+.alto-contraste .required:before {
+	color: #ffffff;
+}
+
+/* Row - title */
+.alto-contraste .row-title {
+	color: #ffffff;
+}
+
+/* Menu - Botões */
+.alto-contraste .nav-button li>a {	
+	background: #000000;
+	border-color: #ffffff;
+}
+
+.alto-contraste .nav-button li>a, .alto-contraste .nav-button li>a:hover, .alto-contraste .nav-button li>a:focus {
+	color: #ffffff;
+}
+
+.alto-contraste .nav-button li>a:hover {
+	background: #333;
+}
+
+/* Botões  */
+.alto-contraste .btn-default {
+	background: #000000;
+	color: #ffffff;
+}
+
+/* Links */
+.alto-contraste a.btn-link, .alto-contraste .btn-link:hover {
+	color: #ffffff;
+}
+
+/* Formulário */
+.alto-contraste .form-control, .alto-contraste .form-control[disabled], .alto-contraste .form-control[readonly], .alto-contraste fieldset[disabled] .form-control {
+	background: #000000;
+	color: #ffffff;
+}
+
+.right-title {
+	float:right;
+	font-weight: normal;
+}
+
+/* ----------- Simple Table -------------- */
+.alto-contraste .simple-table tbody tr:nth-child(odd){
+	background-color: #333;
+}
+
+
+/* ----------- Table -------------- */
+.alto-contraste .hover-table tr:not(.not-hover):hover {
+	background-color: #6B6B6B;
+}
+
+.alto-contraste .table .table {
+	background-color: #000000;
+}
+
+.alto-contraste .projection-table .titulo {
+	color: #ffffff;
+}
+
+/* ------------- ngTable ------------- */
+.alto-contraste .table>thead>tr>th, .alto-contraste .table>tbody>tr>th, .alto-contraste .table>tfoot>tr>th {
+	border-right: 1px solid #FFF;
+	border-bottom: 1px solid #FFF;
+	border-top: solid 1px #FFF !important;
+	font-weight: 500;
+}
+
+.alto-contraste .table>thead>tr>td, .alto-contraste .table>tbody>tr>td, .alto-contraste .table>tfoot>tr>td {
+	border-right: 1px solid #FFF;
+	border-bottom: 1px solid #FFF;
+}
+
+.alto-contraste .table tr th:first-child, .alto-contraste .table tr td:first-child {
+  border-left: 1px solid #FFF;
+}
+
+.alto-contraste .table>thead>tr>th, .alto-contraste .table>tbody>tr>th, .alto-contraste .table>tfoot>tr>th, .alto-contraste .table>tfoot>tr>td {
+	background: #333;
+	border-color: #FFF;	
+}
+
+.alto-contraste .ng-table th.sortable div::after, .alto-contraste .ng-table th.sortable div::before, .alto-contraste .ng-table th.sortable div::before {
+	border-color: #FFF transparent !important;	
+}
+
+/* ------------- Pagination ------------- */
+.alto-contraste .pagination-control {		
+	border-color: #fff;
+	background: #333;
+}
+
+.alto-contraste .pagination-control ul.pagination>.active a {
+	color: #fff;
+	background : #000;
+	border: 1px solid #fff;
+}
+
+.alto-contraste .pagination-control>.pagination>.disabled a, .alto-contraste .pagination-control>.pagination>.disabled a:hover, .alto-contraste .pagination-control>.pagination>.disabled a:focus {
+	color: #e2e2e2;
+	background: #000;
+	border: 1px solid #fff;
+}
+
+.alto-contraste .pagination-control ul.pagination>li>a {
+	border: 1px solid #fff;
+	background: #000;
+}
+
+/* ------------- ngTabs ------------- */
+.alto-contraste .nav-tabs.nav-justified>li {
+	background: #000;
+	color: #fff;
+}
+
+.alto-contraste	.nav-tabs.nav-justified>li.active {
+	border-bottom-color: #000;
+	background: #000;
+}
+
+/* ------------- Panel Icone ------------- */
+.alto-contraste .panel, .alto-contraste .panel-icon .icon-head, .alto-contraste .btn-icon .icon-head, .alto-contraste .panel-default>.panel-heading {
+	background: #000;
+}
+
+.alto-contraste .panel-default > .panel-heading, .alto-contraste .panel-default > .panel-heading [class*="icon-"], .alto-contraste .panel-subtitle {
+	color: #FFF;
+}
+
+.alto-contraste .panel-icon .icon-head [class*="icon-"], .alto-contraste .btn-icon .icon-head [class*="icon-"], .alto-contraste .panel-collapse .panel-body .panel-title,
+.alto-contraste .icon-setting::before {
+	color: #FFF;
+}
+
+/* ------------- Popover ------------- */
+.alto-contraste .popover.bottom>.arrow:after {
+	border-bottom-color: #000;
+}
+
+.alto-contraste .popover.bottom>.arrow {
+	border-bottom-color: #FFF;
+}
+
+.alto-contraste .popover{
+	background-color: #000;
+	border: 1px solid #FFF;
+}
+
+/* ------------- Slide show  ------------- */
+@media only screen (max-width: 480px)  {
+	.carousel-inner {
+	   min-height: 670px;
+	}
+}
+
+@media only screen and (min-width: 481px ) and (max-width: 768px) {
+	.carousel-inner {
+	   min-height: 430px;
+	}
+}
+
+@media only screen and (min-width: 769px ) and (max-width: 1024px) {
+	.carousel-inner {
+		  min-height: 280px;
+	}
+}
+
+@media only screen and (min-width: 1025px) {
+	.carousel-inner {
+		  min-height: 250px;
+	}
+}
+
+.carousel-indicators {
+  bottom: -10px;
+}
+
+.carousel-indicators .active {
+	width: 9px;
+	height: 9px;
+	border: 1px solid #777777;
+	background-color: #777777;
+}
+
+.carousel-indicators li {
+	width: 7px;
+	height: 7px;
+	border: 1px solid #C9C9C9;
+	background-color: #C9C9C9;
+}
+
+.carousel-caption{
+    position: static;
+    text-shadow: none;
+    text-align: left;
+    color: #000;
+}
+
+.scroll-popup {
+  overflow-x: hidden;
+  overflow-y: auto;
+  max-height: 400px;
+}
+
+.carousel-inner p {
+	font-size: 13px ;
+}
+
+/* -------------------- Css Casos de Uso ---------------------- */
+
+/* ------------- ECSU001 - Autenticar Usuário ------------- */
+.alto-contraste .nav-principal .navbar-login, 
+.alto-contraste .nav-principal .navbar-login a {
+	color: #ffffff;
+	background-color: #333;
+}
+
+.alto-contraste .sidebar .sidebar-header {
+	border-top: 5px solid #FFF;
+}
+
+
+/* ------------- ECS004 - Manter Dispositivos Regulamento ------------- */
+
+.alto-contraste .select-row:hover{
+	background: #D6EBFF;
+	color: #000;
+}
+
+.alto-contraste .selected-row{
+	background: #D6EBFF;
+	color: #000;
+}
+
+/* Página Inicial */
+.home-page {
+	margin-top: 30px;
+	min-height: 580px;
+	height: 100%;
+	padding-left: 10px;
+	min-height: 660px;
+}
+
+.home-page .panel-principal {
+	float: left;
+	width: 47%;
+	min-height: 610px;
+	height: 100%;
+	padding: 15px;
+  	margin: 3% 1%;
+  	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+
+.home-page .panel-principal .panel-body {
+	clear: both;
+}
+
+.home-page .panel-title {
+	border: none;
+}
+
+.home-page .link-base-legal {
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.home-page .panel-group {
+	text-align: left;
+	margin: 8% 0 0;
+	display: block;
+}
+
+.home-page .panel-group div.container-group, .panel-group span.container-group  {
+    border: 1px solid #CCC !important;
+    background-color: #FFF;
+    text-align: center;
+    border-radius: 4px;
+    display: block;
+    padding: 0px;
+}
+
+.home-page .panel-group label {
+	color: #00594B;
+	font-weight: 600 !important;
+    font-family: 'Open Sans' !important;
+}
+
+.home-page a.btn-icon, .componente-avaliacao span.btn-icon  {
+	width: 162px;
+	height: 116px;
+	display: inline-block;
+	padding: 0;
+	margin: 20px;
+	text-decoration: none;
+}
+
+.home-page span.btn-icon-head, .componente-avaliacao  span.btn-icon-head {
+	top: 2px;
+	left: 48px;
+	z-index: 1;
+	width: 60px;
+	height: 60px;
+	display: block;
+	position: relative;
+	border-radius: 35px;
+	-moz-border-radius: 35px;
+	-webkit-border-radius: 35px;
+	border: 1px solid transparent;
+}
+
+.home-page span.btn-icon-content {
+	top: -30px;
+	width: 160px;
+	min-height: 82px;
+	display: block;
+	position: relative;
+}
+.home-page span.btn-icon-content span.btn-icon-text, .componente-avaliacao span.btn-icon-content span.btn-icon-text {
+	height: 40px;
+	width: 160px;
+	text-align: center;
+	display: table-cell;  
+	vertical-align:middle;
+	text-transform: uppercase;
+}
+
+.home-page span.btn-icon-position, .componente-avaliacao span.btn-icon-position {
+	top: 36px;
+	padding: 0 5px;
+	display: block;
+	position: relative;
+}
+
+.home-page .btn-icon-head [class^="icon-"]:before, .componente-avaliacao .btn-icon-head [class^="icon-"]:before, 
+.home-page .btn-icon-head [class*=" icon-"]:before, .componente-avaliacao .btn-icon-head [class^="icon-"]:before,
+.home-page .btn-icon-head [class^="icon-"]:after, .componente-avaliacao .btn-icon-head [class^="icon-"]:before, 
+.home-page .btn-icon-head [class*=" icon-"]:after, .componente-avaliacao .btn-icon-head [class^="icon-"]:before {
+	font-size: 37px;
+	line-height: 60px;
+    margin-left: 0;
+	position: relative;
+}
+
+.home-page .panel-sub-title div {
+	width: 48%;
+	float: left;
+}
+
+.home-page .panel-sub-title div:not(:last-child) {
+    margin-right: 10px;
+}
+
+.home-page .panel-sub-title .sub-title {
+	text-transform: uppercase;
+	cursor: pointer;
+}
+
+.home-page .panel-sub-title [class^="icon-"]:before, .home-page .panel-sub-title [class*=" icon-"]:before,
+.home-page .panel-sub-title [class^="icon-"]:after, .home-page .panel-sub-title [class*=" icon-"]:after {
+	font-size: 20px;
+}
+
+.home-page .panel-principal img.logo-sgd {
+	float: left;
+	margin: 10px;
+}
+
+
+/* Página Inicial */
+.alto-contraste .home-page .panel-principal {
+	border: solid 1px #fff;
+	color: #ffffff;
+	background-color: #000000;
+}
+
+.alto-contraste .home-page .panel-principal .panel-group div.container-group, .panel-group span.container-group  {
+    color: #ffffff;
+	background-color: #000000;
+}
+
+.alto-contraste .home-page .panel-group label {
+	color: #fff;
+}
+
+.fadeOut {
+	opacity: 0;
+	transition: 0.5s;
+}
+
+.invisivel {
+	display: none;
+}
