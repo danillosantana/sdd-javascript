@@ -1,21 +1,15 @@
-var formPesqusiarSistema = document.querySelector("#formPesquisarSistema");
-var btnPesquisarSistema =  document.querySelector("#pesquisar-sistema");
-var btnLimparSistema =  document.querySelector("#limparSistema");
-var listaSistema = document.querySelector("#listaSistema");
-var bodyTableSistema = document.querySelector("#bodyTableSistema");
-
 /**
  * Executa a ação do botão de pesquisa de sistemas.
  */
-btnPesquisarSistema.addEventListener("click", function(event) {
-   let filtroSistemaBean = getFiltroSistemaBean(formPesqusiarSistema);
+$("#pesquisarSistema").on('click', function(event) {
+   let filtroSistemaBean = getFiltroSistemaBean($('#formPesquisarSistema'));
     pesquisar(filtroSistemaBean);
 });
 
 /**
  * Executa a ação do botão de limpar.
  */
-btnLimparSistema.addEventListener("click", function(event) {
+$("#limparSistema").on('click', function(event) {
     limpar();
  });
 
@@ -26,9 +20,9 @@ btnLimparSistema.addEventListener("click", function(event) {
  */
 function getFiltroSistemaBean(form) {
     let filtroSistemaBean = {
-      descricao : form.descricao.value,
-      sigla : form.sigla.value,
-      email : form.email.value
+      descricao : form.find('#descricao').val(),
+      sigla : form.find('#sigla').val(),
+      email : form.find('#email').val()
     };
   
     return filtroSistemaBean
@@ -40,23 +34,13 @@ function getFiltroSistemaBean(form) {
  * @param {*} filtroSistemaBean 
  */
 function pesquisar(filtroSistemaBean) {
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://localhost:8080/api-sdd/sistema/getSistemasTOPorFiltro", true);
-    xhr.setRequestHeader("Content-Type", "application/json");
-
-    xhr.addEventListener("load", function() {
-        if (xhr.status == 200) {
-            listaSistema.classList.remove("invisivel");
-            var sistemasTO = JSON.parse(xhr.responseText);
-            montarTrsSistema(sistemasTO);
-        } else {
-            listaSistema.classList.add("invisivel");
-            adicionaMensagemErro(xhr.response);
-        }
-    });
-
-    var json = JSON.stringify(filtroSistemaBean);
-    xhr.send(json);
+    httpPost('sistema/getSistemasTOPorFiltro', filtroSistemaBean).then(data =>{
+        $("#listaSistema").removeClass('invisivel');
+        let sistemasTO = data;
+        montarTrsSistema(sistemasTO);
+    }, error =>{
+        adicionaMensagemErro(error);
+    })
 }
 
 /**
@@ -65,10 +49,10 @@ function pesquisar(filtroSistemaBean) {
  * @param {*} sistemasTO 
  */
 function montarTrsSistema(sistemasTO) {
-    bodyTableSistema.innerHTML = "";
+    $('#bodyTableSistema').text("");
     sistemasTO.forEach(sistemaTO => {
-        var sistemaTr = montaTrSistema(sistemaTO);
-        bodyTableSistema.appendChild(sistemaTr);
+        let sistemaTr = montaTrSistema(sistemaTO);
+        $('#bodyTableSistema').append(sistemaTr);
     });
 }
 
@@ -78,15 +62,25 @@ function montarTrsSistema(sistemasTO) {
  * @param {*} sistemaTO 
  */
 function montaTrSistema(sistemaTO) {
-    var sistemaTr = document.createElement("tr");
-    sistemaTr.appendChild(montaTd(sistemaTO.descricao));
-    sistemaTr.appendChild(montaTd(sistemaTO.sigla));
-    sistemaTr.appendChild(montaTd(sistemaTO.email));
-    sistemaTr.appendChild(montaTd(sistemaTO.url));
-    sistemaTr.appendChild(montaTd(sistemaTO.status));
+    let sistemaTr = $('<tr>');
+
+    let descricao = montaTd(sistemaTO.descricao);
+    sistemaTr.append(descricao);
+
+    let sigla = montaTd(sistemaTO.sigla);
+    sistemaTr.append(sigla);
+    
+    let email = montaTd(sistemaTO.email);
+    sistemaTr.append(email);
+
+    let url = montaTd(sistemaTO.url);
+    sistemaTr.append(url);
+
+    let acoes = montaTd(sistemaTO.status)
+    sistemaTr.append(acoes);
 
     var tdAcoes = montaTd("")
-    sistemaTr.appendChild(montarAcoesTd(tdAcoes, sistemaTO));
+    sistemaTr.append(montarAcoesTd(tdAcoes, sistemaTO));
 
     return sistemaTr;
 }
@@ -97,9 +91,9 @@ function montaTrSistema(sistemaTO) {
  * @param {*} dado 
  */
 function montaTd(dado) {
-    var td = document.createElement("td");
-    td.classList.add("text-center");
-    td.textContent = dado;
+    var td = $('<td>');
+    td.addClass('text-center');
+    td.text(dado);
 
     return td;
 }
@@ -118,20 +112,20 @@ function montarAcoesTd(td, sistemaTO) {
  * Monta a ação de alteção de sistema.
  */
 function montarAcaoAlterar(td, sistemaTO) {
-    let acaoAlterar = document.createElement("a");
-    acaoAlterar.classList.add("btn");
-    acaoAlterar.classList.add("btn-link");
+    let acaoAlterar = $('<a>');
+    acaoAlterar.addClass('btn');
+    acaoAlterar.addClass('btn-link');
 
-    acaoAlterar.setAttribute("onclick", "alterar("+sistemaTO.id+")");
-    acaoAlterar.setAttribute("role", "button");
-    acaoAlterar.setAttribute("title", "Alterar Sistema");
+    acaoAlterar.attr('onclick', 'alterar('+sistemaTO.id+')');
+    acaoAlterar.attr('role', 'button');
+    acaoAlterar.attr('title', 'Alterar Sistema');
 
-    let imgAlterar = document.createElement("img");
-    imgAlterar.setAttribute("alt", "alterar");
-    imgAlterar.setAttribute("src", "img/alterar.png");
+    let imgAlterar = $('<img>');
+    imgAlterar.attr('alt', 'alterar');
+    imgAlterar.attr('src', 'img/alterar.png');
 
-    acaoAlterar.appendChild(imgAlterar);
-    td.appendChild(acaoAlterar);
+    acaoAlterar.append(imgAlterar);
+    td.append(acaoAlterar);
 }
 
 /**
@@ -145,9 +139,9 @@ function  alterar(idSistema) {
  * Reseta os filtros de pesquisa e a tabela de sistema;
  */
 function limpar() {
-    listaSistema.classList.add("invisivel");
-    bodyTableSistema.innerHTML = "";
-    formPesqusiarSistema.descricao.value = "";
-    formPesqusiarSistema.sigla.value = "";
-    formPesqusiarSistema.email.value = "";
+    $('#listaSistema').text("");
+    $('#bodyTableSistema').text("");
+    $('#formPesquisarSistema').find('#descricao').val("") ;
+    $('#formPesquisarSistema').find('#sigla').val("");
+    $('#formPesquisarSistema').find('#email').val("");
 }

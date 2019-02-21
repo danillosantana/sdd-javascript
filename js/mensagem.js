@@ -1,22 +1,19 @@
-var msg = document.querySelector("#mensagem");
-
 /**
- * Adiciona a mensagem de erro.
+ * Adiciona a mesagem no diplay
  * 
- * @param {*} mensagem 
+ * @param {*} msg 
+ * @param {*} classes 
  */
-function adicionaMensagemErro(mensagem) {
-    this.msg.innerHTML = ""
-    var div = document.createElement("div");
-    div.classList.add("alert");
-    div.classList.add("alert-danger");
-    div.textContent = mensagem;
+function adicionaMensagem(msg, classes) {
+    var div = $('<div>');
+    div.addClass(classes);
+    div.text(msg);
 
-    this.msg.appendChild(div);
+    $("#mensagem").append(div);    
 
     setTimeout(function() {
-        this.msg.innerHTML = ""
-    }, 2000);
+        $("#mensagem").find('div').remove();
+    }, 5000);
 }
 
 /**
@@ -24,16 +21,15 @@ function adicionaMensagemErro(mensagem) {
  * 
  * @param {*} mensagem 
  */
-function adicionaMensagemSucesso(mensagem) {
-    this.msg.innerHTML = ""
-    var div = document.createElement("div");
-    div.classList.add("alert");
-    div.classList.add("alert-success");
-    div.textContent = mensagem;
+function adicionaMensagemErro(msg) {
+    adicionaMensagem(msg, 'alert alert-danger');
+}
 
-    this.msg.appendChild(div);
-
-    setTimeout(function() {
-        this.msg.innerHTML = ""
-    }, 2000);
+/**
+ * Adiciona a mensagem de erro.
+ * 
+ * @param {*} mensagem 
+ */
+function adicionaMensagemSucesso(msg) {
+    adicionaMensagem(msg, 'alert alert-success');
 }

@@ -1,18 +1,34 @@
-function httpGet(url) {
-    var xhr = new XMLHttpRequest();
-    return new Promise((resolve, reject) => {
+const HEADER = {CONTENT_TYPE : 'Content-Type', APPLICATION : 'application/json'}
 
-        xhr.onreadystatechange = (e) => {
-          if (xhr.status === 200) {
-            console.log('SUCCESS', xhr.responseText);
-            resolve(JSON.parse(xhr.responseText));
-          } else {
-            console.warn('request_error');
-          }
-        };
-    
-        xhr.open('GET', url);
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.send();
+function httpGet(url) {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+          method : 'GET',
+          url: url,
+          contentType: HEADER.APPLICATION,
+          dataType: "json",
+        }).done(function(data) {
+          resolve(data);
+        })
+        .fail(function(data) {
+          reject(data.responseText)
+        });
       });
+}
+
+function httpPost(url, data) {
+  return new Promise((resolve, reject) => {
+      $.ajax({
+        method : 'POST',
+        url: url,
+        data: JSON.stringify(data),
+        contentType: HEADER.APPLICATION,
+        dataType: "json",
+      }).done(function(data) {
+        resolve(data);
+      })
+      .fail(function(data) {
+        reject(data.responseText)
+      });
+  });
 }
