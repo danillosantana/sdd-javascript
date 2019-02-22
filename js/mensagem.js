@@ -10,10 +10,11 @@ function adicionaMensagem(msg, classes) {
     div.text(msg);
 
     $("#mensagem").append(div);    
-
+    $("#mensagem").find('div').fadeOut(3000);
+   
     setTimeout(function() {
         $("#mensagem").find('div').remove();
-    }, 5000);
+    }, 4000);
 }
 
 /**

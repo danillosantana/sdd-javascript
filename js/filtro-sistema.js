@@ -40,7 +40,7 @@ function pesquisar(filtroSistemaBean) {
         montarTrsSistema(sistemasTO);
     }, error =>{
         adicionaMensagemErro(error);
-    })
+    });
 }
 
 /**
@@ -132,6 +132,7 @@ function montarAcaoAlterar(td, sistemaTO) {
  * Chama o formulário para alteração do sistema.
  */
 function  alterar(idSistema) {
+    limpar();
     buscarSistemaPorId(idSistema);
 }
 

@@ -148,8 +148,9 @@
 							<div class="form-group" >
 								<label class="col-lg-2 control-label required" for="status" >Status:</label>
 								<div class="col-lg-9" >
-									<input id="status" type="text" name="status" 
-											class="form-control" title="Status" >
+									<select id="status" name="status" class="form-control" title="Status" >
+										
+									</select>
 								</div>
 							</div>
 
@@ -164,8 +165,8 @@
 							<div class="form-group" >
 								<label class="col-lg-2 control-label" for="dataAlteracao" >Data da última alteração:</label>
 								<div class="col-lg-9" >
-									<input id="dataAlteracao" type="text" name="dataAlteracao" 
-											class="form-control" title="Data Alteracao" >
+									<input id="dataAlteracao" type="date" name="dataAlteracao" 
+											class="form-control" title="Data Alteracao"  format="dd/MM/yyyy">
 								</div>
 							</div>
 							
@@ -188,14 +189,37 @@
 							</div>
 
 						</div>
-						
 					</fieldset>
+					<div class="row" >
+									
+						<div class="col-lg-12 text-center" >
+						
+							<a  class="btn btn-default" id="voltarFormSistema">
+								<img class="icon-img" alt="Voltar" src="img/return.png" />
+								<span>Voltar</span>
+							</a>
+					
+							<a title="Salvar" class="btn btn-default" id="salvarSistema">
+								<img class="icon-img" alt="Salvar" src="img/icon_save.png" />
+								<span>Salvar</span>
+							</a>
+
+							<a title="Alterar" class="btn btn-default" id="alterarSistema" onclick="alterar()">
+								<img class="icon-img" alt="Alterar" src="img/icon_save.png" />
+								<span>Alterar</span>
+							</a>
+						
+						</div>
+						
+					</div>
 				</form>			 		
 			</div>
 		</main>
 
 		<script src="lib/jquery.min.js"></script>
+		<script src="lib/moment.js"></script>
 
+		<script src="js/datetime-util.js"></script>
 		<script src="js/http-service.js"></script>
 		<script src="js/mensagem.js"></script>
 		<script src="js/form-sistema.js"></script>

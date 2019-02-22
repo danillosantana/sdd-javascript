@@ -1,5 +1,10 @@
 const HEADER = {CONTENT_TYPE : 'Content-Type', APPLICATION : 'application/json'}
 
+/**
+ * Realiza a requisição GET. 
+ * 
+ * @param {*} url 
+ */
 function httpGet(url) {
     return new Promise((resolve, reject) => {
         $.ajax({
@@ -16,6 +21,12 @@ function httpGet(url) {
       });
 }
 
+/**
+ * Realiza a requisição POST.
+ * 
+ * @param {*} url 
+ * @param {*} data 
+ */
 function httpPost(url, data) {
   return new Promise((resolve, reject) => {
       $.ajax({
