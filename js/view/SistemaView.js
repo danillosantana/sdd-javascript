@@ -7,7 +7,7 @@ var mensagem = new Mensagem();
 /**
  * Executa a ação do botão de pesquisa de sistemas.
  */
-$("#pesquisarSistema").click(function(event) {
+function pesquisar() {
     let filtroSistemaBean = getFiltroSistemaBean($('#formPesquisarSistema'));
     sistemaController.pesquisar(filtroSistemaBean).then(
         data => {
@@ -18,7 +18,7 @@ $("#pesquisarSistema").click(function(event) {
            mensagem.adicionaMensagemErro(error);
         }
     );
-});
+};
 
 /**
  * Retorna uma nova instância de FiltroSistemaBean
@@ -32,7 +32,7 @@ function getFiltroSistemaBean(form) {
     email : form.find('#email').val()
     };
 
-    return filtroSistemaBean
+    return filtroSistemaBean;
 };
 
 /**
@@ -123,27 +123,21 @@ function montarAcaoAlterar(td, sistemaTO) {
 /**
  * Executa a ação do botão de limpar.
  */
-$("#limparSistema").click(function(event) {
-    limpar();
- });
-
- /**
- * Reseta os filtros de pesquisa e a tabela de sistema;
- */
-function limpar() {
+function limparPesquisa() {
     $('#listaSistema').text("");
     $('#bodyTableSistema').text("");
     $('#formPesquisarSistema').find('#descricao').val("") ;
     $('#formPesquisarSistema').find('#sigla').val("");
     $('#formPesquisarSistema').find('#email').val("");
-}
+};
+
 
 /**
  * Chama o formulário para alteração do sistema.
  */
-function  alterar(idSistema) {
-    limpar();
-    definirVisibilidadeElementosParaAlteracao();
+function alterar(idSistema) {
+    limparPesquisa();
+    definirVisibilidadeElementos(false);
     $('#filedControleSistema').find('#descricao').removeClass("invisivel") ;
     sistemaController.buscarSistemaPorId(idSistema).then(
         data => {
@@ -163,10 +157,16 @@ function definirVisibilidadeElementos(isInclusao) {
     $("#filtroSistema").addClass("invisivel");
     $("#listaSistema").addClass("invisivel");
     $("#sistema").removeClass("invisivel");
-    $("#sistema").find('#alterarSistema').removeClass("invisivel");
-    $("#sistema").find('#salvarSistema').addClass("invisivel");
+
     if (isInclusao) {
+        $("#sistema").find('#salvarSistema').removeClass("invisivel");
+        $("#sistema").find('#alterarSistema').addClass("invisivel");
+        $("#sistema").find('#filedControleSistema').addClass("invisivel");
+        filedControleSistema
+    } else {
         $("#sistema").find('#salvarSistema').addClass("invisivel");
+        $("#sistema").find('#alterarSistema').removeClass("invisivel");
+        $("#sistema").find('#filedControleSistema').removeClass("invisivel");
     }
 }
 
@@ -239,7 +239,6 @@ function definirOption(select, data, idSelecionado) {
 
 /**
  * 
- * 
  */
 $('#sistema').find('#status').change(function(){
     var id = $(this).val();
@@ -281,15 +280,45 @@ $('#sistema').find('#alterarSistema').on('click', function() {
  * Salva o sistema.
  */
 function salvar() {
+    sistema = getNovoSistema();
     sistemaController.salvar(sistema).then(
         data =>{
             mensagem.adicionaMensagemSucesso(data);
+            limparNovoSistema();
+            voltar();
         }, error => {
-            adicionaMensagemErro(error);
+            mensagem.adicionaMensagemErro(error);
         }
     );
 }
 
+/**
+ * Chama formulário para adicionar novo sistema.
+ */
 function adicionarNovo() {
-
+    definirVisibilidadeElementos(true);
 }
+
+/**
+ * Retorna uma nova instância de sistema.
+ */
+function getNovoSistema() {
+    let sistema = {
+        sigla : $('#sistema').find('#descricao').val(),
+        descricao : $('#sistema').find('#sigla').val(),
+        email : $('#sistema').find('#email').val()
+    };
+
+    return sistema;
+}
+
+/**
+ * Reseta formulário novo sistema.
+ */
+function limparNovoSistema() {
+    $('#sistema').find('#descricao').val("");
+    $('#sistema').find('#sigla').val("");
+    $('#sistema').find('#email').val("");
+}
+
+

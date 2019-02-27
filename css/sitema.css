@@ -1221,6 +1221,10 @@ td.ng-table-checkbox {
   text-align: left !important;
 }
 
+.text-right {
+	text-align: right !important;
+  }
+
 /* ------------- Color ------------- */
 .text-green {    
 	color: #00594B;

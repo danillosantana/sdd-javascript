@@ -1,5 +1,6 @@
 /**
  * Classe Controller responsável por manipular as informações de sistema.
+ * 
  */
 class SistemaController {
 
@@ -81,7 +82,7 @@ class SistemaController {
             this.httpService.post('sistema/salvar', sistema).then(data => {
                 resolve(data);
             }, error =>{
-                reject(data);
+                reject(error);
             });
         });
     }

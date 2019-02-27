@@ -64,15 +64,20 @@
 									
 									<div class="col-lg-12 text-center" >
 									
-										<a  class="btn btn-default" id="pesquisarSistema">
+										<a  class="btn btn-default" onclick="pesquisar()">
 											<img class="icon-img" alt="Pequisar" src="img/search.png" />
 											<span>Pesquisar</span>
 										</a>
 								
-										<a title="Limpar" class="btn btn-default" id="limparSistema">
+										<a title="Limpar" class="btn btn-default" onclick="limparPesquisa()">
 											<img class="icon-img" alt="Limpar" src="img/clear.png" />
 											<span>Limpar</span>
 										</a>
+										
+										<a class="btn btn-default" onclick="adicionarNovo()" title="Novo Sistema" class="btn-link" >
+											<span class="icon-plus"></span>
+											 <span>Novo Sistema</span>
+									   </a>
 									
 									</div>
 									
@@ -84,18 +89,6 @@
 					</div>
 			</div>
 			<div id="listaSistema" class="invisivel">
-					<div class="row" >
-
-							<div class="col-lg-12 text-right" >
-								
-								<a onclick="adicionarNovo()" title="Novo Sistema" class="btn-link" >
-									 <span class="icon-plus"></span>
-									  <span>Novo Sistema</span>
-								</a>
-							
-							</div>
-							
-						</div>
 					<div class="table-responsive" >
 						<table class="table" >
 							<thead>
