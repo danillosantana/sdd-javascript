@@ -3,132 +3,33 @@ var tiposSituacoes = [];
 
 var sistemaController =  new SistemaController();
 var mensagem = new Mensagem();
+var listaSistemaView = new ListaSistemaView("#listaSistema");
+var filtroSistemaView = new FiltroSistemaView("#filtroSistema");
+
+filtroSistemaView.update();
 
 /**
  * Executa a ação do botão de pesquisa de sistemas.
  */
 function pesquisar() {
-    let filtroSistemaBean = getFiltroSistemaBean($('#formPesquisarSistema'));
+    let filtroSistemaBean = filtroSistemaView.getFiltroSistemaBean();
     sistemaController.pesquisar(filtroSistemaBean).then(
         data => {
-            $("#listaSistema").removeClass('invisivel');
             let sistemasTO = data;
-            montarTrsSistema(sistemasTO);
+            listaSistemaView.update(sistemasTO);
         }, error => {
            mensagem.adicionaMensagemErro(error);
         }
     );
 };
 
-/**
- * Retorna uma nova instância de FiltroSistemaBean
- * 
- * @param {*} form 
- */
-function getFiltroSistemaBean(form) {
-    let filtroSistemaBean = {
-    descricao : form.find('#descricao').val(),
-    sigla : form.find('#sigla').val(),
-    email : form.find('#email').val()
-    };
-
-    return filtroSistemaBean;
-};
-
-/**
- * Monta os trs da lista de sistema.
- * 
- * @param {*} sistemasTO 
- */
-function montarTrsSistema(sistemasTO) {
-    $('#bodyTableSistema').text("");
-    sistemasTO.forEach(sistemaTO => {
-        let sistemaTr = montaTrSistema(sistemaTO);
-        $('#bodyTableSistema').append(sistemaTr);
-    });
-}
-
-/**
- * Define o tr da lista de sistema.
- * 
- * @param {*} sistemaTO 
- */
-function montaTrSistema(sistemaTO) {
-    let sistemaTr = $('<tr>');
-
-    let descricao = montaTd(sistemaTO.descricao);
-    sistemaTr.append(descricao);
-
-    let sigla = montaTd(sistemaTO.sigla);
-    sistemaTr.append(sigla);
-    
-    let email = montaTd(sistemaTO.email);
-    sistemaTr.append(email);
-
-    let url = montaTd(sistemaTO.url);
-    sistemaTr.append(url);
-
-    let acoes = montaTd(sistemaTO.status)
-    sistemaTr.append(acoes);
-
-    var tdAcoes = montaTd("")
-    sistemaTr.append(montarAcoesTd(tdAcoes, sistemaTO));
-
-    return sistemaTr;
-}
-
-/**
- * Define o td da lista de sistema.
- * 
- * @param {*} dado 
- */
-function montaTd(dado) {
-    var td = $('<td>');
-    td.addClass('text-center');
-    td.text(dado);
-
-    return td;
-}
-
-/**
- * Monta as ações da tabela de sistema.
- * 
- * @param {*} td 
- */
-function montarAcoesTd(td, sistemaTO) {
-    montarAcaoAlterar(td, sistemaTO);
-    return td;
-}
-
-/**
- * Monta a ação de alteção de sistema.
- */
-function montarAcaoAlterar(td, sistemaTO) {
-    let acaoAlterar = $('<a>');
-    acaoAlterar.addClass('btn');
-    acaoAlterar.addClass('btn-link');
-
-    acaoAlterar.attr('onclick', 'alterar('+sistemaTO.id+')');
-    acaoAlterar.attr('role', 'button');
-    acaoAlterar.attr('title', 'Alterar Sistema');
-
-    let imgAlterar = $('<img>');
-    imgAlterar.attr('alt', 'alterar');
-    imgAlterar.attr('src', 'img/alterar.png');
-
-    acaoAlterar.append(imgAlterar);
-    td.append(acaoAlterar);
-}
 
 /**
  * Executa a ação do botão de limpar.
  */
 function limparPesquisa() {
-    $('#listaSistema').text("");
-    $('#bodyTableSistema').text("");
-    $('#formPesquisarSistema').find('#descricao').val("") ;
-    $('#formPesquisarSistema').find('#sigla').val("");
-    $('#formPesquisarSistema').find('#email').val("");
+    listaSistemaView.reset();
+    filtroSistemaView.limparFiltros();
 };
 
 
@@ -138,7 +39,6 @@ function limparPesquisa() {
 function alterar(idSistema) {
     limparPesquisa();
     definirVisibilidadeElementos(false);
-    $('#filedControleSistema').find('#descricao').removeClass("invisivel") ;
     sistemaController.buscarSistemaPorId(idSistema).then(
         data => {
             sistema = data;
@@ -154,8 +54,8 @@ function alterar(idSistema) {
  * Define quais elementos devem ser apresentados.
  */
 function definirVisibilidadeElementos(isInclusao) {
-    $("#filtroSistema").addClass("invisivel");
-    $("#listaSistema").addClass("invisivel");
+    filtroSistemaView.reset();
+    listaSistemaView.reset();
     $("#sistema").removeClass("invisivel");
 
     if (isInclusao) {
@@ -196,8 +96,8 @@ $("#voltarFormSistema").on('click', function(event) {
  * Executa a ação de voltar ao filtro de pesquisa
  */
 function voltar() {
-    $("#filtroSistema").removeClass("invisivel");
-    $("#listaSistema").addClass("invisivel");
+    filtroSistemaView.update();
+    listaSistemaView.reset();
     $("#sistema").addClass("invisivel");
 }
 
