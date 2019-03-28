@@ -9,53 +9,80 @@ class SistemaController {
      */
     constructor() {
         this.httpService = new HttpService();
+        this._mensagem = new Mensagem();
+        this._filtroSistemaView = new FiltroSistemaView("#filtroSistema");
+        this._listaSistemaView = new ListaSistemaView("#listaSistema");
+        this._sistemaView = new SistemaView("#sistema");
+        this._sistema = {};
+        this._sistemaObservable = new SistemaObservable(this, function(model) {
+            this._listaSistemaView.update(model);
+        });
+    }    
+
+    /**Inicializa as dependencias do caso de uso. */
+    init() {
+        this._filtroSistemaView.update();
     }
 
     /**
      * Recupera os sistemas pelo filtro informado.
-     * 
-     * @param {*} filtroSistemaBean 
      */
-    pesquisar(filtroSistemaBean) {
-        return new Promise((resolve, reject) => {
-            this.httpService.post('sistema/getSistemasTOPorFiltro', filtroSistemaBean).then(data =>{
-                resolve(data);
-            }, error =>{
-                reject(error);
-            });
+    pesquisar() {
+        let filtroSistemaBean = this._filtroSistemaView.getFiltroSistemaBean();
+        this.httpService.post('http://localhost:8080/api-sdd/sistema/getSistemasTOPorFiltro', filtroSistemaBean).then(data => {
+            let sistemasTO = data;
+            this._sistemaObservable.listar(sistemasTO);
+        }, error => {
+            this._mensagem.adicionaMensagemErro(error);
         });
     }
 
- 
     /**
-     * Retorna sistema de acordo com o id informado.
-     * 
-     * @param {*} idSistema 
+     * Executa a ação do botão de limpar.
      */
-    buscarSistemaPorId(idSistema) {
-        return new Promise((resolve, reject) => {
-            if (idSistema != null && idSistema != "") {
-                this.httpService.get('sistema/getSistemaPorId/'+idSistema)
-                .then(data => {
-                    resolve(data);
-                }, error => {
-                    reject(error);
-                })
-            }
-        });
+    limparPesquisa() {
+        this._sistemaObservable.limpar();
+        this._filtroSistemaView.limparFiltros();
+        this.status = {};
+    };
+
+    /**
+     * Chama o formulário para alteração do sistema.
+     */
+    atualizar(idSistema) {
+        this.limparPesquisa();
+        if (idSistema != null && idSistema != "") {
+            this.httpService.get('http://localhost:8080/api-sdd/sistema/getSistemaPorId/'+idSistema)
+            .then(data => {
+                // this.getTiposSituacoes().then(
+                    // tiposSituacoes => {
+                        let sistema = data;
+                
+                        this._filtroSistemaView.reset();
+                        this._sistemaView.update(sistema, null);    
+                    }, error => {
+                       this._mensagem.adicionaMensagemErro(error);
+                // });
+            }, error => {
+                this._mensagem.adicionaMensagemErro(error);
+                console.log(error);
+            })
+        }
     }
+
 
     /**
      * Altera o sistema.
      */
-    alterar(sistema) {
-        return new Promise((resolve, reject) => {
+    alterar() {
+        console.log('sistema',this._sistema);
+        /*return new Promise((resolve, reject) => {
             this.httpService.post('sistema/alterar', sistema).then(data => {
                 resolve(data);
             }, error =>{
                 reject(data);
             });
-        });
+        });*/
     }
 
     /**
@@ -63,7 +90,7 @@ class SistemaController {
      */
     getTiposSituacoes() {
         return new Promise((resolve, reject) => {
-            this.httpService.get('sistema/getTiposSituacoes').then(
+            this.httpService.get('http://localhost:8080/api-sdd/sistema/getTiposSituacoes').then(
                 data =>{
                     resolve(data);    
                 },
@@ -72,6 +99,14 @@ class SistemaController {
                 }
             );
         });
+    }
+
+    /**
+     * Executa a ação de voltar ao filtro de pesquisa
+     */
+    voltar() {
+        this._sistemaView.reset();
+        this._filtroSistemaView.update();
     }
 
     /**
@@ -85,5 +120,14 @@ class SistemaController {
                 reject(error);
             });
         });
+    }
+    
+    mudarStatus() {
+        this._sistemaView.mudarTipoSituacao();
+    }
+
+    atualizarModelo() {
+        let sistema = this._sistemaView.getSistema();
+        console.log('sistema',sistema);
     }
 }

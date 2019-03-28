@@ -1,7 +1,7 @@
 /**
  * Classe que representa o filtro de pesquisa de sistema.
  */
-class FiltroSistemaView {
+class FiltroSistemaView  extends View {
 
     /**
      * Construtor padrão da classe.
@@ -9,7 +9,7 @@ class FiltroSistemaView {
      * @param {*} seletor 
      */
     constructor(seletor) {
-        this._filtroView = $(seletor);
+        super(seletor);
     }
 
     template() {
@@ -61,12 +61,12 @@ class FiltroSistemaView {
                     
                     <div class="col-lg-12 text-center" >
                     
-                        <a  class="btn btn-default" onclick="pesquisar()">
+                        <a  class="btn btn-default" onclick="sistemaController.pesquisar()">
                             <img class="icon-img" alt="Pequisar" src="img/search.png" />
                             <span>Pesquisar</span>
                         </a>
                 
-                        <a title="Limpar" class="btn btn-default" onclick="limparPesquisa()">
+                        <a title="Limpar" class="btn btn-default" onclick="sistemaController.limparPesquisa()">
                             <img class="icon-img" alt="Limpar" src="img/clear.png" />
                             <span>Limpar</span>
                         </a>
@@ -86,14 +86,10 @@ class FiltroSistemaView {
     </div>`;
     }
 
-    update(sistema) {
-        this._filtroView.text("");
+    update() {
+        this.reset();
         let template = this.template();
-        this._filtroView.html(template);
-    }
-
-    reset() {
-        this._filtroView.text("");
+        this._elemento.html(template);
     }
 
     /**
