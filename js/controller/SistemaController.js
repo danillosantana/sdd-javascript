@@ -14,22 +14,12 @@ class SistemaController {
         this._filtroSistemaView = new FiltroSistemaView("#filtroSistema");
         this._listaSistemaView = new ListaSistemaView("#listaSistema");
         this._sistemaView = new SistemaView("#sistema");
-        
-        this._sistemaProxy = new Proxy(new SistemaObservable(this, function(sistema, tiposSituacoes) {
-            this._sistemaView.update(sistema, tiposSituacoes);
-        }, function(sistemas) {
-            this._listaSistemaView.update(sistemas);
-        }), {
-            get : function(target, prop, receiver) {
-                if ( (prop == 'listar' || prop == 'limparLista' || prop == 'alterar' || prop == 'limpar') 
-                        && typeof(target[prop]) == typeof(Function)){
-                    return function() {    
-                        return Reflect.apply(target[prop], target, arguments);       
-                    }
-                }
-                return Reflect.get(target, prop, receiver);
-            }
-        });
+
+        this._sistemaProxy = SistemaFactory.create(new SistemaObservable(this, function(sistema, tiposSituacoes) {
+                this._sistemaView.update(sistema, tiposSituacoes);
+            }, function(sistemas) {
+                this._listaSistemaView.update(sistemas);
+            }),['listar', 'limparLista', 'alterar', 'limpar']);
         
         this._filtroSistemaProxy = new Proxy(new FiltroSistemaView("#filtroSistema"), {
             get : function(target, prop, receiver) {
