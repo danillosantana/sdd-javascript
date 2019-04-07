@@ -148,7 +148,7 @@ class SistemaView extends View {
     }
 
     update(sistema, tiposSituacoes) {
-        this.reset();
+        this._elemento.text("");
         if (sistema != null && tiposSituacoes != null) {
             this._tiposSituacoes = tiposSituacoes;
             let template = this.template(sistema, tiposSituacoes);

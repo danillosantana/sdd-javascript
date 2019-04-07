@@ -87,9 +87,13 @@ class FiltroSistemaView  extends View {
     }
 
     update() {
-        this.reset();
+        this._elemento.text("");
         let template = this.template();
         this._elemento.html(template);
+    }
+
+    esconderFiltro() {
+        this._elemento.text("");
     }
 
     /**
@@ -97,7 +101,7 @@ class FiltroSistemaView  extends View {
      * 
      * @param {*} form 
      */
-    getFiltroSistemaBean() {
+    filtrar() {
         let form = $('#formPesquisarSistema');
         let filtroSistemaBean = {
         descricao : form.find('#descricao').val(),

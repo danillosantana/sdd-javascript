@@ -1,4 +1,4 @@
-class SistemaFactory {
+class ProxyFactory {
 
     static create(objeto, props) {
         return new Proxy(objeto, {
@@ -8,6 +8,7 @@ class SistemaFactory {
                         Reflect.apply(target[prop], target, arguments);       
                     }
                 }
+                
                 return Reflect.get(target, prop, receiver);
             }
         });

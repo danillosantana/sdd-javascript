@@ -10,40 +10,21 @@ class SistemaController {
     constructor() {
         this.httpService = new HttpService();
         this._mensagem = new Mensagem();
-        
-        this._filtroSistemaView = new FiltroSistemaView("#filtroSistema");
-        this._listaSistemaView = new ListaSistemaView("#listaSistema");
-        this._sistemaView = new SistemaView("#sistema");
 
-        this._sistemaProxy = SistemaFactory.create(new SistemaObservable(this, function(sistema, tiposSituacoes) {
-                this._sistemaView.update(sistema, tiposSituacoes);
-            }, function(sistemas) {
-                this._listaSistemaView.update(sistemas);
-            }),['listar', 'limparLista', 'alterar', 'limpar']);
-        
-        this._filtroSistemaProxy = new Proxy(new FiltroSistemaView("#filtroSistema"), {
-            get : function(target, prop, receiver) {
-                if ( (prop == 'update' || prop == 'reset' || 'limparFiltros') 
-                        && typeof(target[prop]) == typeof(Function)){
-                    return function() {    
-                        return Reflect.apply(target[prop], target, arguments);       
-                    }
-                }
-                return Reflect.get(target, prop, receiver);
-            }
-        });
+        this._sistemaProxy = ProxyFactory.create(new SistemaObservable("#sistema", '#listaSistema',"#filtroSistema"),
+        [ACAO_SISTEMA.INCLUIR, ACAO_SISTEMA.ALTERAR, ACAO_SISTEMA.LISTAR, ACAO_SISTEMA.EXCLUIR]);
     }    
 
     /**Inicializa as dependencias do caso de uso. */
     init() {
-        this._filtroSistemaProxy.update();
+        this._sistemaProxy.aparecerFiltro();
     }
 
     /**
      * Recupera os sistemas pelo filtro informado.
      */
     pesquisar() {
-        let filtroSistemaBean = this._filtroSistemaProxy.getFiltroSistemaBean();
+        let filtroSistemaBean = this._sistemaProxy.filtrar();
         this.httpService.post('http://localhost:8080/api-sdd/sistema/getSistemasTOPorFiltro', filtroSistemaBean).then(data => {
             let sistemasTO = data;
             this._sistemaProxy.listar(sistemasTO);
@@ -57,7 +38,7 @@ class SistemaController {
      */
     limparPesquisa() {
         this._sistemaProxy.limparLista();
-        this._filtroSistemaProxy.limparFiltros();
+        this._sistemaProxy.limparFiltros();
         this.status = {};
     };
 
@@ -72,7 +53,7 @@ class SistemaController {
                 this.getTiposSituacoes().then(
                     tiposSituacoes => {
                         this._sistemaProxy.alterar(sistema, tiposSituacoes);
-                        this._filtroSistemaProxy.reset();    
+                        this._sistemaProxy.esconderFiltro();
                     }, error => {
                        this._mensagem.adicionaMensagemErro(error);
                 });
@@ -117,8 +98,7 @@ class SistemaController {
      */
     voltar() {
         this._sistemaProxy.limpar();
-        this._filtroSistemaProxy.reset();
-        this._filtroSistemaProxy.update();
+        this._sistemaProxy.aparecerFiltro();
     }
 
     /**

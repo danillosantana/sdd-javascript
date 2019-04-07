@@ -42,7 +42,7 @@ class ListaSistemaView extends View {
     }
 
     update(sistemas) {
-        this.reset();
+        this._elemento.text("");
         if (Array.isArray(sistemas) && sistemas.length > 0) {
             let template = this.template(sistemas);
             this._elemento.html(template);
