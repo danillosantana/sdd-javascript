@@ -149,34 +149,14 @@ class SistemaView extends View {
 
     update(sistema, tiposSituacoes) {
         this.reset();
-        this._tiposSituacoes = tiposSituacoes;
-        let template = this.template(sistema, tiposSituacoes);
-        this._elemento.html(template);
+        if (sistema != null && tiposSituacoes != null) {
+            this._tiposSituacoes = tiposSituacoes;
+            let template = this.template(sistema, tiposSituacoes);
+            this._elemento.html(template);
+        }
     }
 
-    getModelo() {
-        return  {
-            sigla : $('#sistema').find('#descricao').val(),
-            descricao : $('#sistema').find('#sigla').val(),
-            email : $('#sistema').find('#email').val(),
-            usuarioResponsavel : $('#sistema').find('#responsavel').val(),
-            dataAlteracao : DateTimeUtil.getDataFormatada($('#sistema').find('#dataAlteracao').val(), FORMTAO_ISO8601),
-            justificativa : $('#sistema').find('#novaJustificativa').val()
-        };
-    }
-
-
-    static atualizarModelo(contexto) {
-        console.log('contexto',contexto);
-        console.log('getModelo',SistemaView.getModelo());
-        /*modelo = {
-            sigla : $('#sistema').find('#descricao').val(),
-            descricao : $('#sistema').find('#sigla').val(),
-            email : $('#sistema').find('#email').val(),
-            usuarioResponsavel : $('#sistema').find('#responsavel').val(),
-            dataAlteracao : DateTimeUtil.getDataFormatada($('#sistema').find('#dataAlteracao').val(), FORMTAO_ISO8601),
-            justificativa : $('#sistema').find('#novaJustificativa').val()
-        };
-        console.log(modelo);*/
+    getSistema() {
+        return "";
     }
 }

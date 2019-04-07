@@ -1,9 +1,3 @@
-/**
- * Classe responsável por notificar a view quando a uma mudança
- * de estado no modelo de sistema.
- * 
- * @author Danillo Santana
- */
 class SistemaObservable {
 
     /**
@@ -12,29 +6,42 @@ class SistemaObservable {
      * @param contexto
      * @param armadilha
      */
-    constructor(contexto, alvo) {
-        this._alvo = alvo;
+    constructor(contexto, sistemaView, listaView) {
+        this._sistemaView = sistemaView;
+        this._listaView = listaView;
+        this._sistema = {};
         this._sistemas = [];
+        this._tiposSituacoes = [];
         this._contexto = contexto;
     }
 
+    alterar(sistema, tiposSituacoes) {
+        this._sistema = sistema;
+        this._tiposSituacoes = tiposSituacoes;
+        Reflect.apply(this._sistemaView, this._contexto, [this._sistema, this._tiposSituacoes]);
+    }
+
     /**
-     * Notifica a view de sistema que deve ser apresentada a
-     * lista de sistemas
+     * Notifica a view de sistema que deve ser apresentada a lista de sistemas
      * 
      * @param sistemas
      */
     listar(sistemas) {
         this._sistemas.push(sistemas);
-        Reflect.apply(this._alvo, this._contexto, this._sistemas);
+        Reflect.apply(this._listaView, this._contexto, this._sistemas);
     }
 
     /**
      * Notifica a view de sistema que deve a lista deve ser esvaziada.
      */
-    limpar() {
+    limparLista() {
         this._sistemas = [];
-        Reflect.apply(this._alvo, this._contexto, this._sistemas);
+        Reflect.apply(this._listaView, this._contexto, this._sistemas);
     }
 
+    limpar() {
+        this._sistema = null;
+        this._tiposSituacoes == null;
+        Reflect.apply(this._sistemaView, this._contexto, [this._sistema, this._tiposSituacoes]);
+    }
 }

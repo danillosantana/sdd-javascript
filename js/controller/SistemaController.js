@@ -10,28 +10,53 @@ class SistemaController {
     constructor() {
         this.httpService = new HttpService();
         this._mensagem = new Mensagem();
+        
         this._filtroSistemaView = new FiltroSistemaView("#filtroSistema");
         this._listaSistemaView = new ListaSistemaView("#listaSistema");
         this._sistemaView = new SistemaView("#sistema");
-        this._sistema = {};
-        this._sistemaObservable = new SistemaObservable(this, function(model) {
-            this._listaSistemaView.update(model);
+        
+        this._sistemaProxy = new Proxy(new SistemaObservable(this, function(sistema, tiposSituacoes) {
+            this._sistemaView.update(sistema, tiposSituacoes);
+        }, function(sistemas) {
+            this._listaSistemaView.update(sistemas);
+        }), {
+            get : function(target, prop, receiver) {
+                if ( (prop == 'listar' || prop == 'limparLista' || prop == 'alterar' || prop == 'limpar') 
+                        && typeof(target[prop]) == typeof(Function)){
+                    return function() {    
+                        return Reflect.apply(target[prop], target, arguments);       
+                    }
+                }
+                return Reflect.get(target, prop, receiver);
+            }
+        });
+        
+        this._filtroSistemaProxy = new Proxy(new FiltroSistemaView("#filtroSistema"), {
+            get : function(target, prop, receiver) {
+                if ( (prop == 'update' || prop == 'reset' || 'limparFiltros') 
+                        && typeof(target[prop]) == typeof(Function)){
+                    return function() {    
+                        return Reflect.apply(target[prop], target, arguments);       
+                    }
+                }
+                return Reflect.get(target, prop, receiver);
+            }
         });
     }    
 
     /**Inicializa as dependencias do caso de uso. */
     init() {
-        this._filtroSistemaView.update();
+        this._filtroSistemaProxy.update();
     }
 
     /**
      * Recupera os sistemas pelo filtro informado.
      */
     pesquisar() {
-        let filtroSistemaBean = this._filtroSistemaView.getFiltroSistemaBean();
+        let filtroSistemaBean = this._filtroSistemaProxy.getFiltroSistemaBean();
         this.httpService.post('http://localhost:8080/api-sdd/sistema/getSistemasTOPorFiltro', filtroSistemaBean).then(data => {
             let sistemasTO = data;
-            this._sistemaObservable.listar(sistemasTO);
+            this._sistemaProxy.listar(sistemasTO);
         }, error => {
             this._mensagem.adicionaMensagemErro(error);
         });
@@ -41,8 +66,8 @@ class SistemaController {
      * Executa a ação do botão de limpar.
      */
     limparPesquisa() {
-        this._sistemaObservable.limpar();
-        this._filtroSistemaView.limparFiltros();
+        this._sistemaProxy.limparLista();
+        this._filtroSistemaProxy.limparFiltros();
         this.status = {};
     };
 
@@ -53,19 +78,16 @@ class SistemaController {
         this.limparPesquisa();
         if (idSistema != null && idSistema != "") {
             this.httpService.get('http://localhost:8080/api-sdd/sistema/getSistemaPorId/'+idSistema)
-            .then(data => {
-                // this.getTiposSituacoes().then(
-                    // tiposSituacoes => {
-                        let sistema = data;
-                
-                        this._filtroSistemaView.reset();
-                        this._sistemaView.update(sistema, null);    
+            .then(sistema => {
+                this.getTiposSituacoes().then(
+                    tiposSituacoes => {
+                        this._sistemaProxy.alterar(sistema, tiposSituacoes);
+                        this._filtroSistemaProxy.reset();    
                     }, error => {
                        this._mensagem.adicionaMensagemErro(error);
-                // });
+                });
             }, error => {
                 this._mensagem.adicionaMensagemErro(error);
-                console.log(error);
             })
         }
     }
@@ -75,14 +97,13 @@ class SistemaController {
      * Altera o sistema.
      */
     alterar() {
-        console.log('sistema',this._sistema);
-        /*return new Promise((resolve, reject) => {
-            this.httpService.post('sistema/alterar', sistema).then(data => {
-                resolve(data);
-            }, error =>{
-                reject(data);
-            });
-        });*/
+        // return new Promise((resolve, reject) => {
+        //     this.httpService.post('sistema/alterar', sistema).then(data => {
+        //         resolve(data);
+        //     }, error =>{
+        //         reject(data);
+        //     });
+        // });
     }
 
     /**
@@ -105,8 +126,9 @@ class SistemaController {
      * Executa a ação de voltar ao filtro de pesquisa
      */
     voltar() {
-        this._sistemaView.reset();
-        this._filtroSistemaView.update();
+        this._sistemaProxy.limpar();
+        this._filtroSistemaProxy.reset();
+        this._filtroSistemaProxy.update();
     }
 
     /**
@@ -120,14 +142,5 @@ class SistemaController {
                 reject(error);
             });
         });
-    }
-    
-    mudarStatus() {
-        this._sistemaView.mudarTipoSituacao();
-    }
-
-    atualizarModelo() {
-        let sistema = this._sistemaView.getSistema();
-        console.log('sistema',sistema);
     }
 }
